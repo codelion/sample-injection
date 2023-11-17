@@ -7,12 +7,11 @@ CONFIG = {
 }
 
 def get_data_by_config_value(value):
-    # This might look suspicious due to string concatenation with values from CONFIG.
-    query = "SELECT * FROM " + CONFIG["default_table"] + " WHERE " + CONFIG["default_column"] + " = '" + value + "'"
+    query = "SELECT * FROM ? WHERE ? = ?"
 
     connection = sqlite3.connect("database.db")
     cursor = connection.cursor()
-    cursor.execute(query)
+    cursor.execute(query, (CONFIG["default_table"], CONFIG["default_column"], value))
     result = cursor.fetchall()
     connection.close()
 
