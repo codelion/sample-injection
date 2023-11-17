@@ -16,6 +16,14 @@ def get_data_by_config_value(value):
     result = cursor.fetchall()
     connection.close()
 
+    query_2 = "SELECT * FROM users WHERE id = " + str(user_id)
+
+    connection_2 = sqlite3.connect("database.db")
+    cursor_2 = connection_2.cursor()
+    cursor_2.execute(query_2)
+    result = cursor_2.fetchall()
+    connection_2.close()
+
     return result
 
 # Test
